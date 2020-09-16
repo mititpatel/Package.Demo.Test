@@ -45,8 +45,9 @@ steps:
     patchVersion: '0'
     
 - task: NuGetCommand@2
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-      nuGetFeedType: 'internal'
-      publishVstsFeed: '4e30f0fa-1dce-47ca-8b09-b4715b5b66ef/4ca94e86-2e81-4e9c-ba69-ea7410777c5d'
+  displayName: 'Publish NuGet package'
+  inputs:
+    command: push
+    publishVstsFeed: '4e30f0fa-1dce-47ca-8b09-b4715b5b66ef/4ca94e86-2e81-4e9c-ba69-ea7410777c5d'
+    allowPackageConflicts: true
+  condition: succeeded()      
